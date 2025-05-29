@@ -1,7 +1,8 @@
-FROM maven:3.9.2-eclipse-temurin-17 AS builder
+FROM registry.access.redhat.com/ubi8/openjdk-17 AS builder
 WORKDIR /app
 COPY . .
-RUN mvn clean install package
+RUN microdnf install -y maven git && \
+    mvn clean install package
 
-FROM quay.io/lib/tomcat
-COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/
+FROM registry.access.redhat.com/jboss-webserver-5/webserver53-tomcat9-openshift
+COPY --from=builder /app/target/*.war /opt/webserver/webapps/
