@@ -2,20 +2,18 @@ stages:
   - build
   - deploy
 
-build-job:       
+build:
   stage: build
   script:
-    - echo "Compiling the code..."
-    - mvn clean install package 
-    - echo "Compile complete."
-  tags:
-    - linux
+    - mvn package
+  artifacts:
+    paths:
+      - target/myapp-g15.war
 
-deploy-job:      
-  stage: deploy  
+deploy:
+  stage: deploy
+  dependencies:
+    - build
   script:
-    - echo "Deploying application..."
-    - - cp "${CI_PROJECT_DIR}/target/myapp-g15.war" /opt/tomcat/webapps/
-    - echo "Application successfully deployed."
-  tags:
-    - linux
+    - sudo cp target/myapp-g15.war /opt/tomcat/webapps/
+    - sudo systemctl restart tomcat
