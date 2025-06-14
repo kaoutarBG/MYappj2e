@@ -11,7 +11,7 @@ build:
 
   artifacts:
     paths:
-      - target/myapp-g15.war
+      - target/myapp-CICD.war
      
    
 deploy:
@@ -19,7 +19,7 @@ deploy:
   dependencies:
     - build
   script:
-    - sudo cp target/myapp-g15.war /opt/tomcat/webapps/
+    - sudo cp target/myapp-CICD.war /opt/tomcat/webapps/
     - sudo systemctl restart tomcat
   tags: 
     - linux
