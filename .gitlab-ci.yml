@@ -1,4 +1,5 @@
-
+variables:
+  BASH_ENV: "/dev/null"  # Désactive le chargement des profils
 stages:
   - build
   - deploy
