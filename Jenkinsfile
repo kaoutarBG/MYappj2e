@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git credentialsId: 'id_gitlab', url: 'https://repo-dev.efi-academy.com/houcem/myapp-j2e-g17.git'
+               // git credentialsId: 'id_gitlab', url: 'https://repo-dev.efi-academy.com/houcem/myapp-j2e-g17.git'
+              checkout scm 
+
             }
         }
         
