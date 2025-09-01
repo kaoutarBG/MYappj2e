@@ -20,6 +20,16 @@ pipeline {
                }
            }
        }
+
+
+       stage('Set Version') {
+    steps {
+        script {
+            def version = "1.0.${env.BUILD_NUMBER}"
+            sh "mvn versions:set -DnewVersion=${version}"
+        }
+    }
+}
        
 
       stage('Nexus'){
