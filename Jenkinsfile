@@ -25,7 +25,7 @@ pipeline {
       stage('Nexus'){
          steps{
 
-             nexusArtifactUploader artifacts: [[artifactId: 'new-year-app-houcem', classifier: '', file: 'myapp-g17.war', type: 'war']], credentialsId: '', groupId: 'com.example', nexusUrl: '172.16.2.45:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'myapp-g17', version: '1.0.0'
+              nexusArtifactUploader artifacts: [[artifactId: 'new-year-app-houcem', classifier: '', file: 'myapp-g17.war', type: 'war']], credentialsId: 'id_nexus', groupId: 'com.example', nexusUrl: '172.16.2.45:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'myapp-g17', version: '1.0.0'
          }
 
       }
