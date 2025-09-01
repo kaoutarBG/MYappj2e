@@ -22,23 +22,12 @@ pipeline {
        }
 
 
-       stage('Set Version') {
-    steps {
-        script {
-                withMaven(globalMavenSettingsConfig: '', jdk: 'java', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
-                      def version = "1.0.${env.BUILD_NUMBER}"
-            sh "mvn versions:set -DnewVersion=${version}"
-                          }
-           
-        }
-    }
-}
-       
+     
 
       stage('Nexus'){
          steps{
 
-              nexusArtifactUploader artifacts: [[artifactId: 'new-year-app-houcem', classifier: '', file: 'myapp-g17.war', type: 'war']], credentialsId: 'id_nexus', groupId: 'com.example', nexusUrl: '172.16.2.45:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0.0'
+              nexusArtifactUploader artifacts: [[artifactId: 'new-year-app-houcem', classifier: '', file: 'target/myapp-g17.war', type: 'war']], credentialsId: 'id_nexus', groupId: 'com.example', nexusUrl: '172.16.2.45:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0.0'
          }
 
       }
