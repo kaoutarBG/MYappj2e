@@ -1,0 +1,10 @@
+---
+name: deploy war on tomcat
+hosts: localhost
+become: true
+
+tasks:
+    - name: copy war 
+      copy:
+          src: *.war
+          dest: /opt/tomcat9/webapps
