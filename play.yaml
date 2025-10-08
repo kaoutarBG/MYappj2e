@@ -6,5 +6,5 @@ become: true
 tasks:
     - name: copy war 
       copy:
-          src: *.war
+          src:  myapp-g18-houcem.war
           dest: /opt/tomcat9/webapps
