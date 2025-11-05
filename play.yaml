@@ -1,6 +1,6 @@
 --- 
 - name: deploy war
-  hosts: all
+  hosts: localhost
   become: true
 
   tasks:
