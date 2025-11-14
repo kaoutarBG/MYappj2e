@@ -42,8 +42,33 @@ pipeline {
 
 
         stage('Deploy K8s'){
-            steps{
+            environment {
+                          GIT_REPO_NAME = "myapp-j2e-g19"
+                          GIT_USER_NAME = "houcem"
                
+                  }
+
+            steps{
+               dir('maven')
+                 withCredentials([gitUsernamePassword(credentialsId: 'id_gitlab', gitToolName: 'Default')]) {
+          
+                          sh '''
+                              git config user.email "houcem@test.com"
+                              git config user.name "houcem" 
+                              BUILD_NUMBER=${BUILD_NUMBER}
+                              echo ${BUILD_NUMBER} 
+                              imageTag=$(grep -oP '(?<=maven-app:)[^]+' maven.yaml)
+                              echo $imageTag
+                              sed -i "s/MAVEN_IMAGE:${imageTag}/${MAVEN_IMAGE}:${BUILD_NUMBER}/" maven.yaml 
+                              git add maven.yaml
+                              git commit -m "Update deployement Image to version \${BUILD_NUMBER}"
+                              git push https://${GITLAB_TOKEN}:${GIT_USER_NAME}@repo-dev.efi-academy.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                              ''' 
+    
+
+
+
+                    }
                 
 
                 
