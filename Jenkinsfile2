@@ -49,7 +49,7 @@ pipeline {
                   }
 
             steps{
-               dir('maven')
+               dir('maven'){
               withCredentials([string(credentialsId: 'GITLAB_TOKEN', variable: 'GITLAB_TOKEN')]) {
 
           
