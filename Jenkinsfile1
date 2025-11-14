@@ -29,7 +29,7 @@ pipeline {
             steps{
                script  {
                    withDockerRegistry(credentialsId: 'id_docker') {
-                                     docker.image(${env.MAVEN_IMAGE}).push()
+                                     docker.image("${env.MAVEN_IMAGE}").push()
 
                 }
 
@@ -43,7 +43,7 @@ pipeline {
 
         stage('Deploy K8s'){
             steps{
-                script {
+              
 
                  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: '', contextName: '', credentialsId: 'id_k8s', namespace: '', serverUrl: '']]) {
                          sh '''
@@ -57,7 +57,7 @@ pipeline {
                          
 } 
 
-                }
+                
 
                 
             }
