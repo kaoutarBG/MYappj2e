@@ -50,7 +50,8 @@ pipeline {
 
             steps{
                dir('maven')
-                 withCredentials([gitUsernamePassword(credentialsId: 'id_gitlab', gitToolName: 'Default')]) {
+              withCredentials([string(credentialsId: 'GITLAB_TOKEN', variable: 'GITLAB_TOKEN')]) {
+
           
                           sh '''
                               git config user.email "houcem@test.com"
@@ -65,7 +66,7 @@ pipeline {
                               git push https://${GITLAB_TOKEN}:${GIT_USER_NAME}@repo-dev.efi-academy.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                               ''' 
     
-
+              }
 
 
                     }
