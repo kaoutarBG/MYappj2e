@@ -45,6 +45,7 @@ pipeline {
             environment {
                           GIT_REPO_NAME = "myapp-j2e-g19"
                           GIT_USER_NAME = "houcem"
+                          MAVEN_REPO = "houcemdevops/maven-app"
                
                   }
 
@@ -60,7 +61,7 @@ pipeline {
                               echo ${BUILD_NUMBER} 
                               imageTag=$(grep -oP '(?<=maven-app:)[^ ]+' maven.yaml)
                               echo $imageTag
-                              sed -i "s/houcemdevops/maven-app:${imageTag}/${MAVEN_IMAGE}/" maven.yaml 
+                              sed -i "s|${MAVEN_REPO}:${imageTag}|${MAVEN_IMAGE}|" maven.yaml 
                               git add maven.yaml
                               git commit -m "Update deployement Image to version \${BUILD_NUMBER}"
                               git push https://${GITLAB_TOKEN}:${GIT_USER_NAME}@repo-dev.efi-academy.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
