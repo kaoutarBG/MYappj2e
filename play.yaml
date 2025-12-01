@@ -1,11 +1,11 @@
 --- 
 
-name: deploy on tomcat
-hosts: localhost
+- name: deploy on tomcat
+  hosts: localhost
 
-become: true 
+  become: true 
 
-tasks:
+  tasks:
 
     - name: copy war
       copy:
