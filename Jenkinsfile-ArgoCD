@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONARQUBE_SERVER = 'sonar-server'
         SCANNER_HOME     = tool 'sonar-scanner'
-        BUILD_NUMBER = '${env.BUILD_NUMBER}'
+        NB = '${env.BUILD_NUMBER}'
         MAVEN_IMAGE = "houcemdevops/maven-argo"
     }
 
