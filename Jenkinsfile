@@ -5,7 +5,7 @@ pipeline {
         // Nom du serveur SonarQube défini dans "Manage Jenkins > Configure System"
         SONARQUBE_SERVER = 'sonar-server'
         // Nom de l’outil SonarScanner défini dans "Global Tool Configuration"
-        SCANNER_HOME     = tool 'SonarQubeScanner'
+        SCANNER_HOME     = tool 'sonar-scanner'
     }
 
     stages {
