@@ -6,7 +6,6 @@ pipeline {
         SCANNER_HOME     = tool 'sonar-scanner'
         BUILD_NUMBER = '${env.BUILD_NUMBER}'
         MAVEN_IMAGE = "houcemdevops/maven-argo:${env.BUILD_NUMBER}"
-
     }
 
     stages {
@@ -42,8 +41,7 @@ pipeline {
         stage('Trivy File Scan'){
           steps{
 
-               sh 'trivy fs . ' > rapportfs.txt
-
+               sh 'trivy fs .  > rapportfs.txt'
           }
         }
 
@@ -58,7 +56,7 @@ pipeline {
          stage('Trivy Image Scan'){
           steps{
 
-               sh 'trivy image ${env.MAVEN_IMAGE}' > rapportimage.txt
+               sh 'trivy image ${env.MAVEN_IMAGE} > rapportimage.txt'
 
           }
         }
@@ -73,12 +71,12 @@ pipeline {
         }
 
 
-        stage('Deploy') {
+      /*  stage('Deploy') {
             steps {
                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'id_tomcat', path: '', url: 'http://172.16.20.100:8080')],
                        contextPath: null,
-                       war: '**/*.war'
+                       war: '*.war'
             }
-        }
+        }*/
     }
 }
