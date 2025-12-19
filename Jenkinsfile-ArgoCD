@@ -52,13 +52,12 @@ pipeline {
                }  
            }
         }
+        
+        stage('trivy image'){
+            steps{
 
-        stage('Trivy Image Scan'){
-          steps{
-
-               sh 'trivy image ${env.MAVEN_IMAGE} > rapportimage.txt'
-
-          }
+                sh 'trivy image ${env.MAVEN_IMAGE} > rapportimage.txt'
+            }
         }
         
 
