@@ -1,0 +1,19 @@
+---
+- name: Deployer le WAR sur Tomcat
+  hosts: all
+  become: yes
+  vars:
+    war_file: /home/efi/target/myapp-g22.war
+    tomcat_webapps: /opt/tomcat/webapps
+    tomcat_service: tomcat
+
+
+  tasks:
+
+    - name: Copier le WAR sur le serveur
+      copy:
+        src: "{{ war_file }}"
+        dest: "{{ tomcat_webapps }}/myapp.war"
+        owner: tomcat
+        group: tomcat
+      become: yes
