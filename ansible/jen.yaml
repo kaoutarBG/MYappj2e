@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    war_file: /home/efi/target/myapp-g22.war
+    war_file: /target/myapp-g22.war
     tomcat_webapps: /opt/tomcat/webapps
     tomcat_service: tomcat
 
